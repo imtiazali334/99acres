@@ -1,0 +1,30 @@
+<div class="body">
+    <div class="sginup-page">
+  <div class="form">
+          <!-- <form class="register-form">
+            <input type="text" placeholder="name"  >
+            <input type="password" placeholder="password" />
+            <input type="text" placeholder="email address"/>
+            <button>create</button>
+            
+          </form>       -->
+          <form class="signup-form" #myForm="ngForm" (ngSubmit)="signup(myForm.value,myForm.reset())">
+           <h2>Sign-up</h2>
+           <P>{{msg}}</P>
+            <a href="#" routerLink="/login">Login</a>
+            <input type="text" placeholder="username" required  name="name" ngModel />
+            <input type="password" placeholder="password" required  name="password" ngModel />
+            <input type="text" placeholder="email" required  name="email" ngModel />
+            <input type="date"  placeholder="Date Of Birth" required  name="DOB" ngModel />
+            <div>
+                <label class="gender" style="padding:10px" *ngFor="let g of gender" >
+                    <input type="radio" name="gender"  value={{g}} (change)="radioChange($event)">{{g}}
+                </label>
+            </div> 
+            <button  type="submit"  >Sign-up</button>
+            <!-- <p class="message">Not registered? <a href="#" routerLink="/register">Create an account</a></p> -->
+            <p class="message">Already registered? <a href="#" routerLink="/login">Sign In</a></p>
+          </form>
+        </div>
+      </div>
+</div>

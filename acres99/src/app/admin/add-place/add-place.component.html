@@ -1,0 +1,184 @@
+<div class="container-fluid">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Add Country</a></li>
+    <li><a data-toggle="tab" href="#menu1">Add State</a></li>
+    <li><a data-toggle="tab" href="#menu2">Add City</a></li>
+
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+        <div class="row">
+          <div class="col-md-6">
+              <form>
+              <h5 style="color:green">{{message}}</h5>
+              <div class="row">
+                  <div class="col-md-2">
+                      <label>Country:</label>
+                  </div>
+                  <div class="col-md-6">
+                          <input type="hidden" class="form-control" name="_id" [(ngModel)]="_id">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="countryName" [(ngModel)]="countryName">
+                    </div>
+                  </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <button class="btn btn-primary btn-md" type="submit" (click)="postNewCountry()">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <table class="table" colspan="2">
+              <thead>
+                <th>S.No</th>
+                <th>Country</th>
+                <th>Udate</th>
+                <th>Delete</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let c of CountrysList| paginate: { itemsPerPage: 5, currentPage: p };let c of CountrysList,let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{c.countryName}}</td>
+                  <td><a (click)="contryUpdate(c._id,c.countryName)">
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                  </td>
+                  <td><a (click)="coutryDelete(c._id)">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <div class="row">
+        <div class="col-md-6" style="padding-top:20px">
+          <form #myForm="ngForm" (ngSubmit)="postNewStateName(myForm.value);myForm.reset()">
+            <label style="padding-left:50px">
+              <h4>Add State</h4>
+              <h5 style="color:green">{{messageState}}</h5>
+            </label>
+            <div class="form-group">
+              <div class="col-md-8">
+                  <input type="hidden" class="form-control" name="_id" [(ngModel)]="_id">
+                <div class="form-group">
+                  <label>Select Country</label>
+                  <select class="form-control" name="countryName" [(ngModel)]="countryName" required="true">
+                    <option>Select</option>
+                    <option *ngFor="let countrylist of CountrysList">{{countrylist.countryName}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Add State</label>
+                  <input type="text" class="form-control" name="stateName" [(ngModel)]="stateName">
+                </div>
+                <button class="btn btn-primary btn-md" type="submit">Submit</button>
+              </div>
+              <div class="col-md-2">
+              </div>
+            </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+              <table class="table" colspan="2">
+                <thead>
+                  <th>S.No</th>
+                  <th>Country</th>
+                  <th>State</th>
+                  <th>Udate</th>
+                  <th>Delete</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let s of getStateData| paginate: { itemsPerPage: 5, currentPage: p };let s of CountrysList,let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{s.countryName}}</td>
+                    <td>{{s.stateName}}</td>
+                    <td><a (click)="stateUpdate(s)">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                      </a>
+                    </td>
+                    <td><a (click)="stateDelete(s._id)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <form #myForm="ngForm" (ngSubmit)="postNewCityName(myForm.value)">
+        <div class="row">
+          <div class="col-md-6" style="padding-top:20px">
+            <label style="padding-left:50px">
+              <h4>Add City</h4>
+            </label>
+            <div class="form-group">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label>Select Country</label>
+                  <select class="form-control" name="countryName" (change)="getCountryNameToUpdateState($event)">
+                    <option>Select</option>
+                    <option *ngFor="let countrylist of CountrysList">{{countrylist.countryName}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Select State</label>
+                  <select class="form-control" name="stateName" ngModel>
+                    <option>Select</option>
+                    <option *ngFor="let s of loopDataState">{{s}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Add City</label>
+                  <input type="text" class="form-control" name="cityName" ngModel>
+                </div>
+                <button class="btn btn-primary btn-md" type="submit">Submit</button>
+              </div>
+              <div class="col-md-2">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+              <table class="table" colspan="2">
+                <thead>
+                  <th>S.No</th>
+                  <th>Country</th>
+                  <th>State</th>
+                  <th>City</th>
+                  <th>Udate</th>
+                  <th>Delete</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let c of cityList| paginate: { itemsPerPage: 5, currentPage: p };let c of cityList,let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{c.countryName}}</td>
+                    <td>{{c.stateName}}</td>
+                    <td>{{c.cityName}}</td>
+                    <td><a (click)="contryUpdate(c._id,c.countryName)">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                      </a>
+                    </td>
+                    <td><a (click)="c">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

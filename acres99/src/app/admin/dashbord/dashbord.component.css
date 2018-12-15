@@ -1,0 +1,72 @@
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+  .navbar{
+    background-color: #5874bb !important;
+  }
+  .navbar ul li a{
+    color:white;
+  }
+  .active a{
+    background-color: rgb(38, 94, 139) !important;
+}
+  
+  .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color:  #3f5da8;
+   
+}
+  /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+  .row.content {height: 670px}
+
+  /* Set gray background color and 100% height */
+  .sidenav {
+    padding-top: 20px;
+    background-color: #3f5da8;
+    height: 100%;
+    /* position: fixed; */
+  }
+  .sidenav p {
+    padding: 8px 4px 4px 16px;
+    color: white;
+    top: 0;
+    left: 0;
+  }
+  .main-content .sidenav{
+    height: 100%;
+  }
+  .sidenav p a{
+    
+    text-decoration: none;
+    /* font-size: 25px; */
+    color: white;
+    display: inline-block;
+    
+  }
+  .sidenav{
+    padding: 0;
+    top: 0;
+    bottom: 0;
+  }
+  .sidenav p:hover{
+    background-color: rgb(32, 34, 117);
+  }
+
+  
+  /* Set black background color, white text and some padding */
+  footer {
+    background-color: rgb(14, 20, 56);
+    color: white;
+    padding: 15px;
+  }
+  
+  /* On small screens, set height to 'auto' for sidenav and grid */
+  @media screen and (max-width: 767px) {
+    .sidenav {
+      height: auto;
+      padding: 15px;
+    }
+    .row.content {height:auto;} 
+  }
+
+  

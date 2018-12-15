@@ -1,0 +1,25 @@
+.bg{
+    background-image: url('../../assets/img/bg1\ \(2\).jpg');
+    background-size:cover;
+    width: 100%;
+    height: 480px;
+}
+.notify{
+  /* background-color: black; */
+  
+  background-color: black;
+  opacity: 0.8;
+}
+.conetent{
+    background-color: transparent;
+    color: transparent;
+    color: white;
+    padding: cover;
+    padding-top: 180px;
+    padding-bottom: 180px;
+    align-items: center;
+}
+
+.input-group{
+    padding: 25px;
+}

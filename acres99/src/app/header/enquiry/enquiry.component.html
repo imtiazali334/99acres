@@ -1,0 +1,16 @@
+<div class="position">
+  <div class="enquery-form">
+    <form #myForm="ngForm" (ngSubmit)="onsubmit(myForm.value);myForm.reset()" >
+      <h4 class="heading" style="text-align:center">Enqurey Form</h4>
+      <div class="container-fluid">
+        <label>Name:</label><input type="text" name="name" ngModel class="form-control" required="true">
+        <label>Email:</label><input type="text" name="email" ngModel class="form-control">
+        <label>Contact No:</label><input type="number" name="contact" ngModel class="form-control">
+        <label>Comment:</label>
+        <textarea placeholder="Comment" class="form-control" rows="3" name="comment" ngModel></textarea>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-default btn-md" style=" display: block;margin: 0 auto;">Submit</button>
+    </form>
+  </div>   
+</div>

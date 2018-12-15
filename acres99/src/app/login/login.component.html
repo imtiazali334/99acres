@@ -1,0 +1,23 @@
+  <div class="body">
+      <div class="login-page">
+    <div class="form">
+            <!-- <form class="register-form">
+              <input type="text" placeholder="name"  >
+              <input type="password" placeholder="password" />
+              <input type="text" placeholder="email address"/>
+              <button>create</button>
+              <p class="message">Already registered? <a href="#">Sign In</a></p>
+            </form>       -->
+            <form class="login-form" #myForm="ngForm" (ngSubmit)="onlogin(myForm.value)">
+             <h2>Admin Login</h2>
+             <P style="color:red">{{message}}</P>
+              <input type="text" placeholder="username" required  name="name" ngModel />
+              <input type="password" placeholder="password" required  name="password" ngModel />
+              <button  type="submit" >login</button>
+              <p class="message">Not registered? <a href="#" routerLink="/register">Create an account</a></p>
+            </form>
+          </div>
+        </div>
+  </div>
+<!-- <button class="btn btn-primary" id="well" (click)="click()">Login</button> -->
+<router-outlet></router-outlet>

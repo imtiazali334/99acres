@@ -1,0 +1,51 @@
+<!-- {{enquirydata |json}} -->
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name:</th>
+      <th>Email:</th>
+      <th>Contact:</th>
+      <th>Comment:</th>
+      <th>Date:</th>
+      <th>Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let e of enquirydata |paginate: { itemsPerPage: 5, currentPage: p }">
+      <td>{{e.name}}</td>
+      <td>{{e.email}}</td>
+      <td>{{e.contact}}</td>
+      <td>{{e.comment}}</td>
+      <td>{{e.date | date:'medium'}}</td>
+      <td style="cursor: pointer;" (click)="updatefun(e._id)"><span data-toggle="modal" data-target="#myModalupdate"><span class="glyphicon glyphicon-pencil"></span></span></td>
+    </tr>
+  </tbody>
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+<div class="modal fade" id="myModalupdate" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update</h4>
+      </div>
+      <div class="modal-body">
+          <form #myForm="ngForm" (ngSubmit)="updateData(myForm.value,myForm.reset())">
+              <label>Name:</label><input type="text" class="form-control" name="name" [(ngModel)]="name" required="true">
+              <label>Contact:</label><input type="text" class="form-control" name="contact" [(ngModel)]="contact" required="true">
+              <label>Email:</label><input type="text" class="form-control" name="email" [(ngModel)]="email" required="true">
+              <label>comment:</label><input type="text" class="form-control" name="comment" [(ngModel)]="comment" required="true">
+              <br>
+              <button type="submit" class="btn btn-info btn-md">Update</button>
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

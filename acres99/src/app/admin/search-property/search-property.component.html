@@ -1,0 +1,27 @@
+<div class="container-fluid" >
+ <input type="text" #txtFname  [(ngModel)]="searchterm" class="form-control" style="width:250px; display: inline; float:right;">
+</div>
+<table class="table">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Flat</th>
+          <th>Location</th>
+          <th>Area</th>
+          <th>Landmark</th>
+          <th>Zip</th>
+          <th>Photo</th>
+        </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let p of data | search: searchterm | paginate: { itemsPerPage: 10, currentPage: p }">
+          <td>{{p.name}}</td>
+          <td>{{p.flat}}</td>
+          <td>{{p.address.location}}</td>
+          <td>{{p.address.area}}</td>
+          <td>{{p.address.landmark}}</td>
+          <td>{{p.address.zip}}</td>
+          <td><img src="http://localhost:3200/{{p.photo}}" style="width:170px;height:100px;"></td>
+  </tbody>
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>

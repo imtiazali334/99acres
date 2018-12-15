@@ -1,0 +1,209 @@
+<style>
+  table td{
+  width: 20%;
+}
+  </style>
+<div class="container-fluid">
+  <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModaladd" style="float:right;margin-top: 10px;border-radius: 12px;"><span class="glyphicon glyphicon-pluse"></span>Add
+    Property</button>
+</div>
+<div class="container-fluid">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Flat</th>
+        <th>Location</th>
+        <th>Area</th>
+        <th>Landmark</th>
+        <th>Zip</th>
+        <th>Photo</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of getdata | paginate: { itemsPerPage: 5, currentPage: p }">
+        <td>{{p.name}}</td>
+        <td>{{p.flat}}</td>
+        <td>{{p.address.location}}</td>
+        <td>{{p.address.area}}</td>
+        <td>{{p.address.landmark}}</td>
+        <td>{{p.address.zip}}</td>
+        <td><img src="http://localhost:3200/{{p.photo}}" style="width:250px;height:100px"></td>
+        <td><a (click)="onfindbyid(p._id)" data-toggle="modal" data-target="#myModalupdate"><span class="glyphicon glyphicon-pencil"></span></a></td>
+        <td><a (click)="ondelete(p._id)"><span class="glyphicon glyphicon-trash"></span></a></td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModaldelete" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        {{p.name}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModalupdate" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Property</h4>
+      </div>
+      <form #addproperty='ngForm' (ngSubmit)='uploadData(addproperty.value)'>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-6">
+
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Name</label>
+                <input type="type" class="form-control" name="name" [(ngModel)]="addproperty.name" ngModel id="exampleFormControlInput1"
+                  required="true" placeholder="name">
+              </div>
+              <div class="form-group">
+                <label>Flat</label>
+                <select class="form-control" name="flat" [(ngModel)]="addproperty.flat" ngModel required="true">
+                  <option selected disabled hidden>Select</option>
+                  <option>1BHK</option>
+                  <option>2BHK</option>
+                  <option>3BHK</option>
+                  <option>4BHK</option>
+                  <option>5BHK</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlFile1">Photo Upload</label>
+                <input type="file" class="form-control-file" (change)='onFileChanged($event)' required="true">
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div ngModelGroup="address">
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Area</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" name="area" [(ngModel)]="addproperty.area"
+                    ngModel placeholder="Address" rows="3" required="true"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Location</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" name="location" [(ngModel)]="addproperty.location"
+                    ngModel placeholder="Location" required="true">
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Landmark</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" name="landmark" [(ngModel)]="addproperty.landmark"
+                    ngModel placeholder="Landmarks" required="true">
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Zip</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" name="zip" [(ngModel)]="addproperty.zip"
+                    ngModel placeholder="Zip" required="true">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModaladd" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+          <div class="alert alert-success alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <strong>Success!</strong> 
+            </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Property</h4>
+        
+      </div>
+      <form #myForm='ngForm' (ngSubmit)='uploadData(myForm.value)'>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Name</label>
+                <input type="type" class="form-control" name="name" [(ngModel)]="name" id="exampleFormControlInput1"
+                  required="true" placeholder="name">
+              </div>
+              <div class="form-group">
+                <label>Flat</label>
+                <select class="form-control" name="flat" [(ngModel)]="flat" required="true">
+                  <option selected >Select</option>
+                  <option>1BHK</option>
+                  <option>2BHK</option>
+                  <option>3BHK</option>
+                  <option>4BHK</option>
+                  <option>5BHK</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlFile1">Photo Upload</label>
+                <input type="file" class="form-control-file primary" id="exampleFormControlFile1" name="photo" (change)='onFileChanged($event)'
+                  required="true">
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div ngModelGroup="address">
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Area</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" name="area" [(ngModel)]="area"
+                    placeholder="Address" rows="3" required="true"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Location</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" name="location" [(ngModel)]="location"
+                    placeholder="Location" required="true">
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Landmark</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" name="landmark" [(ngModel)]="landmark"
+                    placeholder="Landmarks" required="true">
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Zip</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" name="zip" [(ngModel)]="zip"
+                    placeholder="Zip" required="true">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" >Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

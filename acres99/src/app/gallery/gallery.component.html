@@ -1,0 +1,42 @@
+<div class="">
+  <div class="row">
+    <div class="col-xs-1"></div>
+    <div class="col-md-2">
+      <h4>PROPERTY GALLERY</h4>
+      <div class="" *ngFor="let g of getgallery,let i = index">
+        <div class="panel panel-default panel-full">
+          <div class="panel-body panel-main">
+            <img class="image5" src="http://localhost:3200/{{g.photo}}">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-7">
+      <h4 style="text-align:center">List Of PROPERTY's</h4>
+      <div class="row">
+        <div class="" *ngFor="let m of getproperty,let i =index">
+          <div class="col-xs-6" *ngIf="i%2 ==0">
+            <div class="panel panel-default" >
+              <div class="panel-body">
+                <h5> {{i+1}}{{m.name}}</h5>
+                <h6>{{m.address.area}}</h6>
+                <p>{{m.address.zip}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6" >
+            <div class="panel panel-default">
+              <div class="panel-body" *ngIf="i%2 !=0">
+                <h5> {{i+1}} {{m.name}}</h5>
+                <h6>{{m.address.area}}</h6>
+                <p>{{m.address.zip}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2">
+        </div>
+    </div>
+  </div>
+</div>

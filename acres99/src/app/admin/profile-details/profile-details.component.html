@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <h2 style="padding-left:20px">personal Details</h2>
+  <div class="alert alert-success alert-dismissible" id="success">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Success!</strong> Indicates a successful or positive action.
+    </div>
+  <form class="form-horizontal" [formGroup]="personalDetails"  (ngSubmit)="postData();personalDetails.reset()">
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Email:</label>
+      <div class="col-sm-6">
+        <input type="email" class="form-control"  placeholder="Enter email" id="email" formControlName="email">
+      </div>
+    </div>
+    <!-- <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Password:</label>
+      <div class="col-sm-6">
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+      </div>
+    </div> -->
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Name:</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control"  placeholder="Name" id="name"  formControlName="name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2">Father Name:</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control"  placeholder="Father Name" id="fatherName" formControlName="fatherName">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Mother Name:</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control"  placeholder="Mother name" id="motherName"  formControlName="motherName" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Working as:</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control"  placeholder="Workin as" id="workingAs"  formControlName="workingAs">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Address:</label>
+      <div class="col-sm-6">
+        <textarea type="text" class="form-control" rows="3"  placeholder="Address" id="address" formControlName="address" ></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-6">
+        <button class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
