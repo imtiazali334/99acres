@@ -37,7 +37,7 @@ app.use('/api', function(req, res, next) {
     }
   });
 
-app.get('/api/enquiry',(req,res)=>{
+app.get('/enquiry',(req,res)=>{
     Enquiry.find((err,docs)=>{
         if(!err){res.status(200).send(docs)}
         else{console.log("Error in retriveing Data "+JSON.stringify(err,undifind,2))}

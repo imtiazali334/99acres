@@ -40,7 +40,7 @@ app.use('/',addCity)
 
 app.listen(port, () => console.log('Server started at port : '+port));
 
-app.use('/welcome',(req,res)=>{
+app.use('/api/welcome',(req,res)=>{
     res.send("yees working")
 })
 

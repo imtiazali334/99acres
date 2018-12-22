@@ -22,15 +22,9 @@ mainUrl :any = "http://localhost:3200/addData";
       })
     });
   }
-  // uploadImage(data) {
-  //   console.log(data);
-  //   let imageData;
-  //   return new Promise((resolve, reject) => {
-  //       this.http.post(this.url, data).subscribe((res) => {
-  //           imageData = res;
-  //           console.log(imageData);
-  //           resolve(imageData);
-  //       });
-  //   });
-  // }
+
+
+  getDataService(){
+    return this.http.get(this.mainUrl).map(res=>res.json());
+  }
 }

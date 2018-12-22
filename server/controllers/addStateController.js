@@ -22,13 +22,14 @@ app.get('/addstate/:id',(req,res)=>{
 app.post('/addstate',(req,res)=>{
     if(req.body._id !== null && req.body._id && req.body._id !== 'undefined'){
         var addState ={
+
             countryName:req.body.countryName,
          // countryId :req.body.countryId,
             stateName :req.body.stateName 
         }
         console.log("put call");
         id = req.body._id;
-        AddState.findOneAndUpdate(id,{$set:addState},{new:true},(err,docs)=>{
+        AddState.findByIdAndUpdate(id,{$set:addState},{new:true},(err,docs)=>{
             if(!err){res.send(docs)}
             else{console.log(`Error in updating data ${JSON.stringify(err,undefind,2)}`)}
         })
@@ -44,7 +45,7 @@ app.post('/addstate',(req,res)=>{
         if(!err){res.send(docs)}
         else {console.log(`Error in GetingData From Server ${JSON.stringify(err,undefined,2)}`)}
     });
-}
+        }
 });
 
 app.delete('/addstate/:id',(req,res)=>{

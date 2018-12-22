@@ -12,7 +12,9 @@ app.get('/citys',(req,res)=>{
 });
 
 app.post('/citys',(req,res)=>{
-    if(req.body._id !== null && req.body._id && req.body._id !==undefined){
+    console.log(req.body)
+    if(req.body._id !== null && req.body._id && req.body._id !=='undefined'){
+        console.log('put')
         var addCity = {
             cityName:req.body.cityName,
             stateName:req.body.stateName,
@@ -21,11 +23,11 @@ app.post('/citys',(req,res)=>{
             // stateId:req.body.stateId,
         }
         _id = req.body._id;
-        AddCity.findOneAndUpdate(_id,{$set:addCity},{new:true},(err,docs)=>{
+        AddCity.findByIdAndUpdate(_id,{$set:addCity},{new:true},(err,docs)=>{
             if(!err){res.send(docs);}
             else{ console.log(`Error in updateing record ${JSON.stringify(err,undefind,2)}`)}
         })
-    }
+    }else{
     var addCity = new AddCity ({
         cityName:req.body.cityName,
         stateName:req.body.stateName,
@@ -38,14 +40,17 @@ app.post('/citys',(req,res)=>{
             res.send(docs);
         }else{console.log(`Error in posting City :${JSON.stringify(err,undefind,2)}`)}
     });
+    }
 });
-app.delete('/addcity/:id',(req,res)=>{
+
+
+app.delete('/citys/:id',(req,res)=>{
     if(!ObjectId.isValid(req.params.id))
     return res.send(`No record Found with id ${req.params.id}`);
     
     AddCity.findByIdAndDelete(req.params.id,(err,docs)=>{
         if(!err){res.send(docs)}
         else console.log(`Error in get Records ${JSON.stringify(err,undefind,2)}`)
-    })
-})
+    });
+});
 module.exports = app;

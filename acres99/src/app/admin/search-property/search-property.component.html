@@ -1,5 +1,8 @@
 <div class="container-fluid" >
- <input type="text" #txtFname  [(ngModel)]="searchterm" class="form-control" style="width:250px; display: inline; float:right;">
+        <div class="input-group" style="float: right;width: 400px;padding-top:10px">
+                <span class="input-group-addon" style="background-color:rgb(58, 58, 165)"><i class="glyphicon glyphicon-search" style="color:white" ></i></span>
+                <input type="text" #txtFname  [(ngModel)]="searchterm" class="form-control" >
+              </div>
 </div>
 <table class="table">
   <thead>

@@ -10,7 +10,7 @@ export class AddpropertyService {
   headers;
   reqHeader;
   constructor(public http: Http) { }
-  url: string = "http://localhost:3200/api/addproperty";
+  url: string = "http://localhost:3200/addproperty";
 
 
 AddpropertyService(data){

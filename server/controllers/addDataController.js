@@ -20,6 +20,7 @@ var storage = multer.diskStorage({
 var upload1 = multer({ storage: storage });
 var type = upload1.array('photo');
 
+
 app.use(express.static(__dirname + '../upload1'));
 app.get('/adddata', (req, res) => {
 
@@ -53,7 +54,8 @@ app.post('/adddata', type, (req, res) => {
         contact: req.body.contact,
         propertyType: req.body.propertyType,
         postedBy: req.body.postedBy,
-        photo: filesPath,
+        photo: req.files[0].path,
+        date:req.body.date,
         address: {
             state: req.body.state,
             district: req.body.district,

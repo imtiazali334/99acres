@@ -26,11 +26,9 @@ userId;
   onlogin(data){
     this.auth.authLogin(data).subscribe(res=>{
       this.logdata = res;
-      console.log(JSON.stringify(this.logdata.token));
       this.token = this.logdata.token;
       this.message = this.logdata.message;
       this.id =this.logdata.id
-      console.log(this.token + "this is user id "+ this.id)
     sessionStorage.setItem('token',this.token);
     this.userId = sessionStorage.setItem('id',this.id);
     var un = 'undefined';

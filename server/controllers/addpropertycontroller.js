@@ -28,16 +28,14 @@ app.use(express.static(__dirname + '../upload'));
 // console.log( (__dirname, '../upload'));
 
 
-
-
-app.get('/api/addproperty',(req,res)=>{
+app.get('/addproperty',(req,res)=>{
 
     Addproperty.find((err,docs)=>{
         if(!err){res.status(200).send(docs)}
         else{console.log("Error in retriveing Data "+JSON.stringify(err,undifind,2))}
     });
 });
-app.get('/api/addproperty/:id',(req,res)=>{
+app.get('/addproperty/:id',(req,res)=>{
     if(!ObjectId.isValid(req.params.id))
     return res.send(`no records get with following Id:${req.params.id} `);
 
@@ -106,8 +104,11 @@ app.delete('/addproperty/:id',(req,res)=>{
     if(!ObjectId.isValid(req.params.id))
     return res.send(`no records get with following Id:${req.params.id} `);
 
+    // if(req.params.id === null|| req.params.id ||req.params.id === 'undefind')
+    // return res.send("No Records found with id" +req.params.id)
+
     Addproperty.findByIdAndDelete(req.params.id,(err,docs)=>{
-        if(!err){res.send("Record Deleted successfully") }
+        if(!err){res.send("Record Deleted successfully" ) }
         else { console.log("Error in Deleting record")}
     })
 })

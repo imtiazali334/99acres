@@ -11,9 +11,10 @@ export class AddCityService {
   }
   
 postCity(data){
+  console.log(data)
   return this.http.post(this.cityUrl,data).map((res:Response)=>res.json());
 }
 deleteCity(id){
-  return this.http.delete(this.cityUrl+`${id}`).map((res:Response)=>res.json());
+  return this.http.delete(this.cityUrl+`/${id}`).map((res:Response)=>res.json());
 }
 }

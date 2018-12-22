@@ -7,6 +7,7 @@ var AddData = mongoose.model('addData',{
     bedRoom:{type:String},
     postedBy:{type:String},
     photo:{type:String},
+    date:{type:Date,default: Date.now },
     address:{
         state:{type:String},
         district:{type:String},
@@ -16,7 +17,7 @@ var AddData = mongoose.model('addData',{
         doorNo:{type:String},
         street:{type:String},
 		landMark:{type:String},
-        zip:{type:Number},
+        zip:{type:Number}
     }
 });
 
